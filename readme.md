@@ -38,8 +38,9 @@ node index.js
 - Bootstrap 
 - JavaScript
 - Node.js
-  - 
-  - 
+  - express
+  - mongoose
+  - morgan
 
 ## Screen shots
 

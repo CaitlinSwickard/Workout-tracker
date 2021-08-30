@@ -24,20 +24,16 @@ const workoutSchema = new Schema({
     },
     weight: {
       type: Number,
-      required: [true, "Please enter the amount of weight used:"],
     },
     sets: {
       type: Number,
-      required: [true, "Please enter the amount of sets completed:"],
     },
     reps: {
       type: Number,
-      required: [true, "Please enter the amount of reps per set:"],
     },
     // if cardio track distance traveled
     distance: {
       type: Number,
-      default: [0, "Please enter distance traveled for cardio workout: "],
     },
   }]
 });
