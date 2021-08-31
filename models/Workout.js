@@ -1,4 +1,6 @@
-const { model, Schema } = require('mongoose');
+// const { model, Schema } = require('mongoose');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
 // new user schema
 const workoutSchema = new Schema({
@@ -38,4 +40,6 @@ const workoutSchema = new Schema({
   }]
 });
 
-module.exports = model('Workout', workoutSchema);
+// module.exports = model('Workout', workoutSchema);
+const Workout = mongoose.model('Workout', workoutSchema);
+module.exports = Workout;
