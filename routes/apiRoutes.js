@@ -38,6 +38,7 @@ router.post("/api/workouts", async (req, res) => {
   try {
     const createWorkout = await Workout.create(req.body);
     res.json(createWorkout);
+    console.log(createWorkout);
   } catch (err) {
     res.json(err);
   }
@@ -64,10 +65,11 @@ router.post("/api/workouts", async (req, res) => {
 // })
 
 // delete workout
-router.delete('/api/workouts', async (req, res) => {
+router.delete('/api/workouts/:id', async (req, res) => {
   try {
-    const deleteWorkout = await Workout.deleteOne();
+    const deleteWorkout = await Workout.findByIdAndDelete(req.params);
     res.json(deleteWorkout);
+    console.log(deleteWorkout)
   } catch (err) {
     res.json(err);
   }
