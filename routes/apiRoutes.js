@@ -10,27 +10,19 @@ const Workout = require("../models/Workout.js");
 // functions to learn how it can be accomplished.
 
 
-// plain get all workouts from DB
-router.get("/api/workouts", async (req, res) => {
+// Add exercises to the most recent workout plan by ID. PUT
+router.put('/api/workouts/:id', async (req, res) => {
   try {
-    // console.log(Workout);
-    const getAllWorkouts = await Workout.find({});
-    // console.log(getAllWorkouts)
-    res.json(getAllWorkouts);
+    const addExercise = await Workout.findByIdAndUpdate(req.params.id,
+      { $push: { exercises: req.body } },
+      { new: true }
+    )
+    console.log(addExercise);
+    res.json(addExercise);
   } catch (err) {
-    res.json(err);
+    res.status(400).json(err);
   }
 });
-
-
-// Add exercises to the most recent workout plan by ID. PUT
-// router.put('/api/workouts', async (req, res) => {
-//   try {
-//     const addExercise= await Workout.
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
 
 
 // Add new exercises to a new workout plan. POST
@@ -38,6 +30,7 @@ router.post("/api/workouts", async (req, res) => {
   try {
     const createWorkout = await Workout.create(req.body);
     res.json(createWorkout);
+    console.log(req.body);
     console.log(createWorkout);
   } catch (err) {
     res.json(err);
@@ -46,28 +39,37 @@ router.post("/api/workouts", async (req, res) => {
 
 
 // View the combined weight of multiple exercises from the past seven workouts on the stats page. GET
-// router.get('/api/stats', async (req, res) => {
-//   try {
-//     const combinedWeight = await Workout.
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
+router.get('/api/workouts', async (req, res) => {
+  try {
+    const getAllWorkouts = await Workout.aggregate([
+      {
+        $addFields: {
+          totalDuration: {
+            $sum: "$exercise.duration"
+          }
+        }
+      }
+    ]);
+    res.json(getAllWorkouts);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
 
-// View the total duration of each workout from the past seven workouts on the stats page. GET
-// router.get('/api/stats', async (req, res) => {
+// View the total duration of each workout from the past seven workouts on the stats page. GET ALL WORKOUT
+// router.get('/api/workouts/range', async (req, res) => {
 //   try {
-//     const totalDuration = await Workout.
+//     const totalDuration = await Workout.aggregate([])
 //   } catch (err) {
 //     res.status(400).json(err);
 //   }
 // })
 
-// delete workout
+// delete workout (added for postman)
 router.delete('/api/workouts/:id', async (req, res) => {
   try {
-    const deleteWorkout = await Workout.findByIdAndDelete(req.params);
+    const deleteWorkout = await Workout.findByIdAndDelete(req.params.id);
     res.json(deleteWorkout);
     console.log(deleteWorkout)
   } catch (err) {
