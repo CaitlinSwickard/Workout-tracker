@@ -6,10 +6,15 @@ const logger = require("morgan");
 const PORT = process.env.PORT || 3001;
 
 // mongoDB connection
-mongoose.connect('mongodb://localhost/workout', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/workoutDB',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+)
   .then(() => console.log('Connected to DB'))
   .catch(e => console.log(e));
 
