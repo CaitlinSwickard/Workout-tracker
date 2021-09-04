@@ -24,19 +24,11 @@ const workoutSchema = new Schema({
       type: Number,
       required: [true, "Please enter the length of time for workout:"],
     },
-    weight: {
-      type: Number,
-    },
-    sets: {
-      type: Number,
-    },
-    reps: {
-      type: Number,
-    },
+    weight: Number,
+    sets: Number,
+    reps: Number,
     // if cardio track distance traveled
-    distance: {
-      type: Number,
-    },
+    distance: Number,
   }]
 });
 
