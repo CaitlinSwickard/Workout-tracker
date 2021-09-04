@@ -46,7 +46,10 @@ This application runs on localhost:3001. Open page and begin to track your worko
   - mongoose
   - morgan
 
-## Screen shots
+## View
 ![Shot-3](images/homepage-workoutapp.png)
 ![Shot-1](images/create-workout.png)
 ![Shot-2](images/dashboard-chart.png)
+
+#### Credits
+Frontend starting files provided © 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
