@@ -5,7 +5,7 @@ This project is a workout tracker. This project is built with a Mongo database w
  
   * [Installation](#install)
   * [Usage](#usage)
-  * [View Heroku app here.]()
+  * [View Heroku app here.](https://nameless-badlands-22446.herokuapp.com/)
 
 
 
@@ -47,6 +47,6 @@ This application runs on localhost:3001. Open page and begin to track your worko
   - morgan
 
 ## Screen shots
-
-![Shot-1]()
-![Shot-2]()
+![Shot-3](images/homepage-workoutapp.png)
+![Shot-1](images/create-workout.png)
+![Shot-2](images/dashboard-chart.png)
