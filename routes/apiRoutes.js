@@ -35,14 +35,14 @@ router.post("/api/workouts", async (req, res) => {
 // View the combined weight of multiple exercises from the past seven workouts on the stats page. GET
 router.get('/api/workouts', async (req, res) => {
   try {
-    const totalWeight = await Workout.aggregate([
+    const totalDuration = await Workout.aggregate([
       {
         $addFields: {
-          totalWeight: { $sum: "$exercises.weight" }
+          totalDuration: { $sum: "$exercises.duration" }
         }
       },
-    ]).limit(7);
-    res.json(totalWeight);
+    ]);
+    res.json(totalDuration);
   } catch (err) {
     res.status(400).json(err);
   }
@@ -51,6 +51,7 @@ router.get('/api/workouts', async (req, res) => {
 
 // View the total duration of each workout from the past seven workouts on the stats page. GET 
 router.get('/api/workouts/range', async (req, res) => {
+  // console.log('route hit')
   try {
     const totalDuration = await Workout.aggregate([
       {
@@ -58,12 +59,13 @@ router.get('/api/workouts/range', async (req, res) => {
           totalDuration: { $sum: "$exercises.duration" }
         }
       }
-    ]).sort({ _id: -1 }).limit(7).sort({ _id: 1 })
+    ]).sort({ _id: 1 }).limit(7)
     res.json(totalDuration);
+    console.log(totalDuration);
   } catch (err) {
     res.status(400).json(err);
   }
-})
+});
 
 
 module.exports = router;
